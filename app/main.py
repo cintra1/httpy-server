@@ -1,6 +1,4 @@
-# Uncomment this to pass the first stage
-# import socket
-
+import socket
 
 def main():
     # You can use print statements as follows for debugging, they'll be visible when running tests.
