@@ -2,7 +2,8 @@ import socket
 
 def handle_request(conn):
     data = conn.recv(1024)
-
+    print("LINES::::",lines)
+    print(data)
     lines = data.splitlines()
     if lines:
         request_line = lines[0]
