@@ -5,6 +5,7 @@ def handle_request(conn):
 
     response = "HTTP/1.1 200 OK\r\n\r\n"
     conn.send(response.encode())
+    
 
 def main():
     config = ("localhost", 4221)
@@ -16,6 +17,7 @@ def main():
 
             conn, addr = server_socket.accept()
             print('Connected by', addr)
+            print('Client is', conn)
 
             with conn:
                 handle_request(conn)
