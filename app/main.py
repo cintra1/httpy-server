@@ -10,11 +10,16 @@ def handle_request(conn):
         request_line = lines[0]
         method, path, http_version = request_line.split()
 
+        request_line = lines[2]
+        header_key, header_value = request_line.split()
+
     method = method.decode()
     path = path.decode()
     http_version = http_version.decode()
+    header_key = header_key.decode() 
+    header_value = header_value.decode()
 
-    print(f"Metodo {method}, path: {path}, version: {http_version}")
+    print(f"Metodo {method}, path: {path}, version: {http_version}, hkey: {header_key}, hvalue {header_value}")
 
     if path.startswith("/user-agent"):
         str = path[12:]
