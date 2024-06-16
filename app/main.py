@@ -10,21 +10,16 @@ def handle_request(conn):
         request_line = lines[0]
         method, path, http_version = request_line.split()
 
+        method = method.decode()
+        path = path.decode()
+        http_version = http_version.decode()
+
         try:
             request_line = lines[2]
             header_key, header_value = request_line.split()
+            header_key = header_key.decode() 
+            header_value = header_value.decode()
         except:
-            print("No header.")
-        
-
-    method = method.decode()
-    path = path.decode()
-    http_version = http_version.decode()
-
-    try:
-        header_key = header_key.decode() 
-        header_value = header_value.decode()
-    except:
             print("No header.")
 
 
