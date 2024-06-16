@@ -2,9 +2,10 @@ import socket
 
 def handle_request(conn):
     data = conn.recv(1024)
+    lines = data.splitlines()
     print("LINES::::",lines)
     print(data)
-    lines = data.splitlines()
+   
     if lines:
         request_line = lines[0]
         method, path, http_version = request_line.split()
