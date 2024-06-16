@@ -8,10 +8,10 @@ def handle_request(conn):
         request_line = lines[0]
         method, path, http_version = request_line.split()
 
-    if path:
-        response = "HTTP/1.1 404 Not Found\r\n\r\n"
-    else:
+    if path == "":
         response = "HTTP/1.1 200 OK\r\n\r\n"
+    else:
+        response = "HTTP/1.1 404 Not Found\r\n\r\n"
         
     conn.send(response.encode())
     
