@@ -17,8 +17,9 @@ def handle_request(conn):
         try:
             request_line = lines[2]
             header_key, header_value = request_line.split()
-            header_key = header_key.decode() 
-            header_value = header_value.decode()
+            if header_value and header_key: 
+                header_key = header_key.decode() 
+                header_value = header_value.decode()
         except:
             print("No header.")
 
