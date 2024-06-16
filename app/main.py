@@ -14,7 +14,7 @@ def main():
     try:
         while True:
             print("Waiting for a connection...")
-            a = socket.getaddrinfo()
+            a = socket.getaddrinfo(config)
             print("liste",a)
             conn, addr = server_socket.accept()
             print('Connected by', addr)
