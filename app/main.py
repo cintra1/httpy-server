@@ -1,13 +1,23 @@
 import socket
 
 def main():
+    config = ("localhost", 4221)
+
     # You can use print statements as follows for debugging, they'll be visible when running tests.
     print("Logs from your program will appear here!")
 
-    server_socket = socket.create_server(("localhost", 4221), reuse_port=True)
-    server_socket.accept() # wait for client
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+        s.bind(config)
+        s.listen(1)
+        conn, addr = s.accept()
+        with conn:
+            print('Connected by', addr)
+            while True:
+                data = conn.recv(1024)
+                if not data: break
+                conn.sendall(data)
 
-    print(server_socket)
+ 
 
 if __name__ == "__main__":
     main()
