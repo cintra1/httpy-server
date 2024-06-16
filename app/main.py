@@ -7,10 +7,10 @@ def handle_request(conn):
     if lines:
         request_line = lines[0]
         method, path, http_version = request_line.split()
-        
+
     print(f"Metodo {method}, path: {path}, version: {http_version}")
     
-    if path == "":
+    if path == "/":
         response = "HTTP/1.1 200 OK\r\n\r\n"
     else:
         response = "HTTP/1.1 404 Not Found\r\n\r\n"
