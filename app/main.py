@@ -10,8 +10,12 @@ def handle_request(conn):
         request_line = lines[0]
         method, path, http_version = request_line.split()
 
-        request_line = lines[2]
-        header_key, header_value = request_line.split()
+        try:
+            request_line = lines[2]
+            header_key, header_value = request_line.split()
+        except:
+            print("No header.")
+        
 
     method = method.decode()
     path = path.decode()
