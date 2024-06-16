@@ -4,7 +4,7 @@ def handle_request(conn):
     data = conn.recv(1024)
 
     response = "HTTP/1.1 200 OK\r\n\r\n"
-    conn.sendall(response)
+    conn.sendall(response.encode())
 
 def main():
     config = ("localhost", 4221)
