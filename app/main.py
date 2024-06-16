@@ -7,22 +7,17 @@ def handle_request(conn):
     print("LINES:: ",lines)
 
     if lines:
-        request_line = lines[0]
+        request_line = lines[0].decode()
         method, path, http_version = request_line.split()
 
-        method = method.decode()
-        path = path.decode()
-        http_version = http_version.decode()
+        headers = {}
 
         try:
-            request_line = lines[2]
-            header_key, header_value = request_line.split()
-            if header_value and header_key: 
-                header_key = header_key.decode() 
-                header_value = header_value.decode()
-        except:
-            print("No header.")
-
+            for line in lines[1:]:
+                header_key, header_value = line.decode().split(': ')
+                headers[header_key] = header_value
+        except Exception as e:
+            print(f"Error analising header: {e}")
 
     print(f"Metodo {method}, path: {path}, version: {http_version}, hkey: {header_key}, hvalue {header_value}")
 
