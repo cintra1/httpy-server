@@ -2,7 +2,13 @@ import socket
 
 def handle_request(conn):
     data = conn.recv(1024)
-    print(data)
+
+    lines = data.splitlines()
+    if lines:
+        request_line = lines[0]
+        method, path, http_version = request_line.split()
+
+    print(f"Metodo: {method}, path: {path}, version: {http_version}")
     response = "HTTP/1.1 200 OK\r\n\r\n"
     conn.send(response.encode())
     
