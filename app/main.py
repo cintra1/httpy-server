@@ -20,8 +20,13 @@ def handle_request(conn):
     method = method.decode()
     path = path.decode()
     http_version = http_version.decode()
-    header_key = header_key.decode() 
-    header_value = header_value.decode()
+
+    try:
+        header_key = header_key.decode() 
+        header_value = header_value.decode()
+    except:
+            print("No header.")
+
 
     print(f"Metodo {method}, path: {path}, version: {http_version}, hkey: {header_key}, hvalue {header_value}")
 
