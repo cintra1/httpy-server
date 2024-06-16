@@ -4,6 +4,8 @@ def handle_request(conn):
     data = conn.recv(1024)
 
     lines = data.splitlines()
+    print("LINES:: ",lines)
+
     if lines:
         request_line = lines[0]
         method, path, http_version = request_line.split()
@@ -14,6 +16,9 @@ def handle_request(conn):
 
     print(f"Metodo {method}, path: {path}, version: {http_version}")
 
+    if path.startswith("/user-agent"):
+        str = path[12:]
+        response = f"HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: {len(str)}\r\n\r\n{str}"
     if path.startswith("/echo"):
         str = path[6:]
         response = f"HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: {len(str)}\r\n\r\n{str}"
