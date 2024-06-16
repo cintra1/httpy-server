@@ -24,7 +24,7 @@ def handle_request(conn):
     if path.startswith("/user-agent"):
         str = path[12:]
         response = f"HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: {len(str)}\r\n\r\n{header_value}"
-    if path.startswith("/echo"):
+    elif path.startswith("/echo"):
         str = path[6:]
         response = f"HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: {len(str)}\r\n\r\n{str}"
     elif path == "/":
