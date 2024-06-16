@@ -8,10 +8,7 @@ def handle_request(conn):
 
 def main():
     config = ("localhost", 4221)
-
     server_socket = socket.create_server(config, reuse_port=True)
-    server_socket.bind(config)
-    server_socket.listen(1)
 
     try:
         while True:
