@@ -17,9 +17,9 @@ def handle_request(conn):
                 header_key, header_value = line.decode().split(': ')
                 headers[header_key] = header_value
         except Exception as e:
-            print(f"Error analising header: {e}")
+            print(e)
 
-    print(f"Metodo {method}, path: {path}, version: {http_version}, hkey: {header_key}, hvalue {header_value}")
+    print(f"Metodo {method}, path: {path}, version: {http_version}, hkey: {header_key}, hvalue {header_value}") 
 
     if path.startswith("/user-agent"):
         response = f"HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: {len(header_value)}\r\n\r\n{header_value}"
