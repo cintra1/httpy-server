@@ -10,7 +10,7 @@ def handle_request(conn):
 
     print(f"Metodo {method}, path: {path}, version: {http_version}")
     
-    if path.encode() == "/":
+    if path.decode() == "/":
         response = "HTTP/1.1 200 OK\r\n\r\n"
     else:
         response = "HTTP/1.1 404 Not Found\r\n\r\n"
