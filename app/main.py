@@ -21,7 +21,12 @@ def handle_request(conn):
 
     print(f"Metodo {method}, path: {path}, version: {http_version}, hkey: {header_key}, hvalue {header_value}") 
 
-    if path.startswith("/user-agent"):
+    if path.startswith("/files"):
+        str = path[7:]
+        with open(str + '.txt', 'r') as archive:
+            content = archive.read()
+        response = f"HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: {len(header_value)}\r\n\r\n{content}"
+    elif path.startswith("/user-agent"):
         response = f"HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: {len(header_value)}\r\n\r\n{header_value}"
     elif path.startswith("/echo"):
         str = path[6:]
