@@ -2,7 +2,7 @@ import socket
 
 def handle_request(conn):
     data = conn.recv(1024)
-
+    print(data)
     response = "HTTP/1.1 200 OK\r\n\r\n"
     conn.send(response.encode())
     
