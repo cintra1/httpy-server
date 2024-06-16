@@ -5,8 +5,9 @@ def main():
     print("Logs from your program will appear here!")
 
     server_socket = socket.create_server(("localhost", 4221), reuse_port=True)
-    if server_socket.accept(): # wait for client
-         server_socket.create_connection()
+    server_socket.accept() # wait for client
+
+    print(server_socket)
 
 if __name__ == "__main__":
     main()
