@@ -13,7 +13,7 @@ def handle_request(conn):
     http_version = http_version.decode()
 
     print(f"Metodo {method}, path: {path}, version: {http_version}")
-    
+    print(path[:5])
     if path[:4] == "/echo":
         str = path[6:]
         response = f"HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: {len(str)}\r\n\r\n{str}"
