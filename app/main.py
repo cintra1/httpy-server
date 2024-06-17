@@ -14,7 +14,7 @@ def handle_request(conn):
         headers = {}
 
         try:
-            for line in lines[3]:
+            for line in lines[1:]:
                 header_key, header_value = line.decode().split(': ')
                 headers[header_key] = header_value
         except Exception as e:
