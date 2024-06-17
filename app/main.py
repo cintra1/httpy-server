@@ -53,6 +53,7 @@ def handle_request(conn):
         if len(lines) >= 3:
             request_line = lines[0].decode()
             text = lines[-1].decode()
+            print(text)
             header_key, header_value = text.split(': ')
         str = path[6:]
         if header_value == "gzip":
