@@ -50,7 +50,7 @@ def handle_request(conn):
                 print(e)
         response = f"HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: {len(header_value)}\r\n\r\n{header_value}"
     elif path.startswith("/echo"):
-        if len(lines) >= 3:
+        if len(lines) >= 4:
             request_line = lines[0].decode()
             text = lines[-1].decode()
             print("TEXTO:::", text)
