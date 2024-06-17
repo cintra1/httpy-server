@@ -19,7 +19,7 @@ def handle_request(conn):
         except Exception as e:
             print(e)
 
-    print(f"Metodo {method}, path: {path}, version: {http_version}, hkey: {header_key}, hvalue {header_value}") 
+    
 
     if path.startswith("/files"):
         str = path[7:]
