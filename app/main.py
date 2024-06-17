@@ -11,24 +11,19 @@ def handle_request(conn):
         request_line = lines[0].decode()
         method, path, http_version = request_line.split()
 
-        headers = {}
-
-        try:
-            for line in lines[1:]:
-                header_key, header_value = line.decode().split(': ')
-                headers[header_key] = header_value
-        except Exception as e:
-            print(e)
-
    # print(f"Metodo {method}, path: {path}, version: {http_version}, hkey: {header_key}, hvalue {header_value}") 
 
     if path.startswith("/files") and method == "GET":
+        if lines:
+            request_line = lines[3].decode()
+            text = request_line.split()
+
         str = path[7:]
         directory = sys.argv[2]
         print(directory, str)
         try:
             with open(f"/{directory}/{str}", "w") as f:
-                body = f.write(str)
+                body = f.write(text)
             response = f"HTTP/1.1 201 OK\r\nContent-Type: application/octet-stream\r\nContent-Length: {len(body)}\r\n\r\n{body}"
         except Exception as e:
             response = f"HTTP/1.1 404 Not Found\r\n\r\n"
@@ -43,6 +38,14 @@ def handle_request(conn):
         except Exception as e:
             response = f"HTTP/1.1 404 Not Found\r\n\r\n"
     elif path.startswith("/user-agent"):
+        if lines:
+            headers = {}
+            try:
+                for line in lines[3]:
+                    header_key, header_value = line.decode().split(': ')
+                    headers[header_key] = header_value
+            except Exception as e:
+                print(e)
         response = f"HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: {len(header_value)}\r\n\r\n{header_value}"
     elif path.startswith("/echo"):
         str = path[6:]
