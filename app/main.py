@@ -22,7 +22,17 @@ def handle_request(conn):
 
    # print(f"Metodo {method}, path: {path}, version: {http_version}, hkey: {header_key}, hvalue {header_value}") 
 
-    if path.startswith("/files"):
+    if path.startswith("/files") and method == "GET":
+        str = path[7:]
+        directory = sys.argv[2]
+        print(directory, str)
+        try:
+            with open(f"/{directory}/{str}", "r") as f:
+                body = f.write(str)
+            response = f"HTTP/1.1 200 OK\r\nContent-Type: application/octet-stream\r\nContent-Length: {len(body)}\r\n\r\n{body}"
+        except Exception as e:
+            response = f"HTTP/1.1 404 Not Found\r\n\r\n"
+    elif path.startswith("/files") and method == "GET":
         str = path[7:]
         directory = sys.argv[2]
         print(directory, str)
