@@ -13,7 +13,7 @@ def handle_request(conn):
 
    # print(f"Metodo {method}, path: {path}, version: {http_version}, hkey: {header_key}, hvalue {header_value}") 
 
-    if path.startswith("/files") and method == "GET":
+    if path.startswith("/files") and method == "POST":
         if lines:
             request_line = lines[3].decode()
             text = request_line.split()
