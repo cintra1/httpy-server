@@ -25,7 +25,7 @@ def handle_request(conn):
         str = path[7:]
         print(str)
         try:
-            with open(f"/str", "r") as f:
+            with open(f"/"+str, "r") as f:
                 body = f.read()
             response = f"HTTP/1.1 200 OK\r\nContent-Type: application/octet-stream\r\nContent-Length: {len(body)}\r\n\r\n{body}"
         except Exception as e:
