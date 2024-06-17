@@ -20,7 +20,7 @@ def handle_request(conn):
 
             filename = path[7:]
             directory = sys.argv[2]
-            print(directory, filename)
+
 
             try:
                 with open(f"{directory}/{filename}", "w") as f:
