@@ -60,7 +60,7 @@ def handle_request(conn):
 
             for type in encoding:
                 print("TIPO:",type.strip())
-                if type.strip() == "gzip":
+                if type.strip() == " gzip":
                     response = f"HTTP/1.1 200 OK\r\nContent-Encoding: gzip\r\nContent-Type: text/plain\r\nContent-Length: {len(str)}\r\n\r\n{str}"
                 else:
                     response = f"HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: {len(str)}\r\n\r\n{str}"
