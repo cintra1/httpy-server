@@ -15,12 +15,10 @@ def handle_request(conn):
 
     if path.startswith("/files") and method == "POST":
         if len(lines) >= 4:
-            request_line = lines[0].decode()
             text = lines[-1].decode()  # Última linha como texto para escrita
 
             filename = path[7:]
             directory = sys.argv[2]
-            print(directory, filename)
 
             try:
                 with open(f"{directory}/{filename}", "w") as f:
