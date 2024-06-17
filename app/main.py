@@ -55,7 +55,7 @@ def handle_request(conn):
             text = lines[2].decode()
             print(text)
             header_key, header_value = text.split(': ')
-            encoding = header_value.spli(',' )
+            encoding = header_value.split(',' )
         
             for type in encoding:
                 if type == "gzip":
