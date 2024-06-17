@@ -26,7 +26,7 @@ def handle_request(conn):
         directory = sys.argv[2]
         print(directory, str)
         try:
-            with open(f"/{directory}/{filename}", "r") as f:
+            with open(f"/{directory}/{str}", "r") as f:
                 body = f.read()
             response = f"HTTP/1.1 200 OK\r\nContent-Type: application/octet-stream\r\nContent-Length: {len(body)}\r\n\r\n{body}"
         except Exception as e:
