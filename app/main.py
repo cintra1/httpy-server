@@ -19,13 +19,13 @@ def handle_request(conn):
         except Exception as e:
             print(e)
 
-    
+   # print(f"Metodo {method}, path: {path}, version: {http_version}, hkey: {header_key}, hvalue {header_value}") 
 
     if path.startswith("/files"):
         str = path[7:]
         print(str)
         try:
-            with open(f"/"+str, "r") as f:
+            with open(f"/files/"+str, "r") as f:
                 body = f.read()
             response = f"HTTP/1.1 200 OK\r\nContent-Type: application/octet-stream\r\nContent-Length: {len(body)}\r\n\r\n{body}"
         except Exception as e:
