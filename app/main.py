@@ -14,19 +14,21 @@ def handle_request(conn):
    # print(f"Metodo {method}, path: {path}, version: {http_version}, hkey: {header_key}, hvalue {header_value}") 
 
     if path.startswith("/files") and method == "POST":
-        if lines:
-            request_line = lines[3].decode()
-            text = request_line.split()
+        if len(lines) >= 4:
+            request_line = lines[0].decode()
+            text = lines[-1].decode()  # Última linha como texto para escrita
 
-        str = path[7:]
-        directory = sys.argv[2]
-        print(directory, str)
-        try:
-            with open(f"/{directory}/{str}", "w") as f:
-                body = f.write(text)
-            response = f"HTTP/1.1 201 OK\r\nContent-Type: application/octet-stream\r\nContent-Length: {len(body)}\r\n\r\n{body}"
-        except Exception as e:
-            response = f"HTTP/1.1 404 Not Found\r\n\r\n"
+            filename = path[7:]
+            directory = sys.argv[2]
+            print(directory, filename)
+
+            try:
+                with open(f"{directory}/{filename}", "w") as f:
+                    f.write(text)
+                body = len(text)
+                response = f"HTTP/1.1 201 Created\r\nContent-Type: text/plain\r\nContent-Length: {body}\r\n\r\n{text}"
+            except Exception as e:
+                response = "HTTP/1.1 404 Not Found\r\n\r\n"
     elif path.startswith("/files") and method == "GET":
         str = path[7:]
         directory = sys.argv[2]
