@@ -52,7 +52,7 @@ def handle_request(conn):
     elif path.startswith("/echo"):
         str = path[6:]
         if len(lines) >= 4:
-            text = lines[3].decode()
+            text = lines[2].decode()
             print(text)
             header_key, header_value = text.split(': ')
         
