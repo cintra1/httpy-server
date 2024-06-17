@@ -50,14 +50,15 @@ def handle_request(conn):
                 print(e)
         response = f"HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: {len(header_value)}\r\n\r\n{header_value}"
     elif path.startswith("/echo"):
+        str = path[6:]
         if len(lines) >= 4:
             request_line = lines[0].decode()
             text = lines[-1].decode()
-            print("TEXTO:::", text)
-
-        str = path[6:]
-        if header_value == "gzip":
-            response = f"HTTP/1.1 200 OK\r\nContent-Encoding: gzip\r\nContent-Type: text/plain\r\nContent-Length: {len(str)}\r\n\r\n{str}"
+            print(text)
+            header_key, header_value = text.split(': ')
+        
+            if header_value == "gzip":
+                response = f"HTTP/1.1 200 OK\r\nContent-Encoding: gzip\r\nContent-Type: text/plain\r\nContent-Length: {len(str)}\r\n\r\n{str}"
         else:
             response = f"HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: {len(str)}\r\n\r\n{str}"
     elif path == "/":
