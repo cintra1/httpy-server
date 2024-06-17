@@ -53,8 +53,8 @@ def handle_request(conn):
         if len(lines) >= 3:
             request_line = lines[0].decode()
             text = lines[-1].decode()
-            print(text)
-            header_key, header_value = text.split(': ')
+            print("TEXTO:::", text)
+
         str = path[6:]
         if header_value == "gzip":
             response = f"HTTP/1.1 200 OK\r\nContent-Encoding: gzip\r\nContent-Type: text/plain\r\nContent-Length: {len(str)}\r\n\r\n{str}"
