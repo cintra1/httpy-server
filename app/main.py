@@ -55,11 +55,13 @@ def handle_request(conn):
             text = lines[2].decode()
             print(text)
             header_key, header_value = text.split(': ')
+            encoding = header_value.spli(',' )
         
-            if header_value == "gzip":
-                response = f"HTTP/1.1 200 OK\r\nContent-Encoding: gzip\r\nContent-Type: text/plain\r\nContent-Length: {len(str)}\r\n\r\n{str}"
-            else:
-                response = f"HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: {len(str)}\r\n\r\n{str}"
+            for type in encoding:
+                if type == "gzip":
+                    response = f"HTTP/1.1 200 OK\r\nContent-Encoding: gzip\r\nContent-Type: text/plain\r\nContent-Length: {len(str)}\r\n\r\n{str}"
+                else:
+                    response = f"HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: {len(str)}\r\n\r\n{str}"
         else:
             response = f"HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: {len(str)}\r\n\r\n{str}"
     elif path == "/":
