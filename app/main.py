@@ -59,7 +59,7 @@ def handle_request(conn):
 
             for value in encoding:
                 var = value.strip()
-                print("TIPO:" + var + "FIM")
+                print("TIPO:" + var)
                 if var == "gzip":
                     response = f"HTTP/1.1 200 OK\r\nContent-Encoding: gzip\r\nContent-Type: text/plain\r\nContent-Length: {len(str)}\r\n\r\n{str}"
                 else:
