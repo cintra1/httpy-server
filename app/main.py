@@ -27,9 +27,9 @@ def handle_request(conn):
         try:
             with open(f"/str", "r") as f:
                 body = f.read()
-            response = f"HTTP/1.1 200 OK\r\nContent-Type: application/octet-stream\r\nContent-Length: {len(body)}\r\n\r\n{body}".encode()
+            response = f"HTTP/1.1 200 OK\r\nContent-Type: application/octet-stream\r\nContent-Length: {len(body)}\r\n\r\n{body}"
         except Exception as e:
-            response = f"HTTP/1.1 404 Not Found\r\n\r\n".encode()
+            response = f"HTTP/1.1 404 Not Found\r\n\r\n"
     elif path.startswith("/user-agent"):
         response = f"HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: {len(header_value)}\r\n\r\n{header_value}"
     elif path.startswith("/echo"):
