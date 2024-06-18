@@ -99,7 +99,6 @@ def handle_echo_request(conn, lines, path):
                     conn.send(response.encode() + body)
                     return
 
-    # If gzip is not in the encoding, send the response uncompressed
     body = echo_str.encode("utf-8")
     response_headers.append(f"Content-Length: {len(body)}")
     response = "\r\n".join(response_headers) + "\r\n\r\n"
