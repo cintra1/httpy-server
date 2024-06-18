@@ -1,5 +1,6 @@
 import socket
 import sys
+import gzip
 
 def handle_request(conn):
     data = conn.recv(1024)
@@ -89,11 +90,12 @@ def handle_echo_request(conn, lines, path):
                 "Content-Type: text/plain",
                 f"Content-Length: {len(echo_str)}"
             ]
-
+            body = gzip.compress(echo_str.encode("utf-8"))
             for value in encoding:
                 print("TIPO:" + value.strip())
                 if value.strip() == "gzip":
                     response_headers.append("Content-Encoding: gzip")
+                    response_headers.append(body)
                     break
 
             response = "\r\n".join(response_headers) + f"\r\n\r\n{echo_str}"
