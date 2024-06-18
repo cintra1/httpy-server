@@ -3,7 +3,6 @@ import sys
 
 def handle_request(conn):
     data = conn.recv(1024)
-
     lines = data.splitlines()
     print("LINES:: ", lines)
 
@@ -45,6 +44,7 @@ def handle_post_request(conn, lines, path):
         body = len(text)
         response = f"HTTP/1.1 201 Created\r\nContent-Type: text/plain\r\nContent-Length: {body}\r\n\r\n{text}"
     except Exception as e:
+        print(e)
         response = "HTTP/1.1 500 Internal Server Error\r\n\r\n"
     conn.send(response.encode())
 
@@ -57,18 +57,21 @@ def handle_get_request(conn, path):
             body = f.read()
         response = f"HTTP/1.1 200 OK\r\nContent-Type: application/octet-stream\r\nContent-Length: {len(body)}\r\n\r\n{body}"
     except Exception as e:
+        print(e)
         response = "HTTP/1.1 404 Not Found\r\n\r\n"
     conn.send(response.encode())
 
 def handle_user_agent_request(conn, lines):
     headers = {}
+    header_value = "Unknown"
     try:
         for line in lines[1:]:
-            header_key, header_value = line.decode().split(': ', 1)
-            headers[header_key] = header_value
+            if ': ' in line.decode():
+                header_key, header_value = line.decode().split(': ', 1)
+                headers[header_key] = header_value
+        header_value = headers.get("User-Agent", "Unknown")
     except Exception as e:
         print(e)
-    header_value = headers.get("User-Agent", "Unknown")
     response = f"HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: {len(header_value)}\r\n\r\n{header_value}"
     conn.send(response.encode())
 
