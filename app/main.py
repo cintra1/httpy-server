@@ -78,6 +78,11 @@ def handle_user_agent_request(conn, lines):
 
 def handle_echo_request(conn, lines, path):
     echo_str = path[6:]
+    response_headers = [
+        "HTTP/1.1 200 OK",
+        "Content-Type: text/plain",
+    ]
+
     if len(lines) >= 4:
         text = lines[2].decode()
         print(text)
@@ -85,24 +90,20 @@ def handle_echo_request(conn, lines, path):
             header_key, header_value = text.split(': ', 1)
             encoding = header_value.split(', ')
 
-            response_headers = [
-                "HTTP/1.1 200 OK",
-                "Content-Type: text/plain",
-                f"Content-Length: {len(echo_str)}"
-            ]
-            body = gzip.compress(echo_str.encode("utf-8"))
             for value in encoding:
-                print("TIPO:" + value.strip())
                 if value.strip() == "gzip":
                     response_headers.append("Content-Encoding: gzip")
-                    break
+                    body = gzip.compress(echo_str.encode("utf-8"))
+                    response_headers.append(f"Content-Length: {len(body)}")
+                    response = "\r\n".join(response_headers) + "\r\n\r\n"
+                    conn.send(response.encode() + body)
+                    return
 
-            response = "\r\n".join(response_headers) + f"\r\n\r\n{echo_str}" + body
-        else:
-            response = f"HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: {len(echo_str)}\r\n\r\n{echo_str}"
-    else:
-        response = f"HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: {len(echo_str)}\r\n\r\n{echo_str}"
-    conn.send(response.encode())
+    # If gzip is not in the encoding, send the response uncompressed
+    body = echo_str.encode("utf-8")
+    response_headers.append(f"Content-Length: {len(body)}")
+    response = "\r\n".join(response_headers) + "\r\n\r\n"
+    conn.send(response.encode() + body)
 
 def main():
     config = ("localhost", 4221)
