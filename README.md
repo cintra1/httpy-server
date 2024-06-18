@@ -1,38 +1,40 @@
-[![progress-banner](https://backend.codecrafters.io/progress/http-server/b27cee5a-4379-4a0d-9549-64955e4c9141)](https://app.codecrafters.io/users/codecrafters-bot?r=2qF)
+![logo-httpy-small](https://github.com/cintra1/httpy-server/assets/101955322/4f1afe8e-eaaf-4926-9bdc-ad033e4dfe82)
 
-This is a starting point for Python solutions to the
-["Build Your Own HTTP server" Challenge](https://app.codecrafters.io/courses/http-server/overview).
+# httpy - HTTP Server in Python
 
-[HTTP](https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol) is the
-protocol that powers the web. In this challenge, you'll build a HTTP/1.1 server
-that is capable of serving multiple clients.
+This project focuses on understanding and implementing fundamental aspects of HTTP servers, including handling HTTP request syntax, managing TCP connections for client-server communication, and providing basic functionalities such as serving files, handling user-agent requests, and echoing client input.
 
-Along the way you'll learn about TCP servers,
-[HTTP request syntax](https://www.w3.org/Protocols/rfc2616/rfc2616-sec5.html),
-and more.
+## Features
+- GET Requests: Serve files from a specified directory.
+- POST Requests: Accept data from clients to create or update files.
+- User-Agent Requests: Retrieve and respond with the User-Agent header from incoming requests.
+- Echo Requests: Echo back specified content from client requests.
+- Error Handling: Return appropriate HTTP status codes (e.g., 404 Not Found, 500 Internal Server Error) for different error scenarios.
 
-**Note**: If you're viewing this repo on GitHub, head over to
-[codecrafters.io](https://codecrafters.io) to try the challenge.
+## Usage
+To use the HTTP server, follow these steps:
 
-# Passing the first stage
+1. Clone the Repository
 
-The entry point for your HTTP server implementation is in `app/main.py`. Study
-and uncomment the relevant code, and push your changes to pass the first stage:
+`git clone https://github.com/your-username/http-server-python.git`
 
-```sh
-git add .
-git commit -m "pass 1st stage" # any msg
-git push origin master
-```
+`cd http-server-python`
 
-Time to move on to the next stage!
+2. Run the Server
 
-# Stage 2 & beyond
+`python http_server.py [directory_path]`
 
-Note: This section is for stages 2 and beyond.
+Replace `[directory_path]` with the absolute path to the directory where files should be stored and retrieved.
 
-1. Ensure you have `python (3.11)` installed locally
-1. Run `./your_server.sh` to run your program, which is implemented in
-   `app/main.py`.
-1. Commit your changes and run `git push origin master` to submit your solution
-   to CodeCrafters. Test output will be streamed to your terminal.
+## Contributing
+Contributions are welcome! If you'd like to contribute to this project, please follow these steps:
+
+1. Fork the repository.
+2. Create a new branch (git checkout -b feature/improvement).
+3. Make your changes.
+4. Commit your changes (git commit -am 'Add new feature').
+5. Push to the branch (git push origin feature/improvement).
+6. Create a new Pull Request.
+
+## License
+This project is licensed under the MIT License - see the LICENSE.md file for details.
