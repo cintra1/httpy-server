@@ -58,9 +58,10 @@ def handle_request(conn):
             encoding = header_value.split(', ')
 
             for value in encoding:
-        
+                print("TIPO:"+value.strip())
                 if value.strip() == "gzip":
                     response = f"HTTP/1.1 200 OK\r\nContent-Encoding: gzip\r\nContent-Type: text/plain\r\nContent-Length: {len(str)}\r\n\r\n{str}"
+                    break
                 else:
                     response = f"HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: {len(str)}\r\n\r\n{str}"
         else:
