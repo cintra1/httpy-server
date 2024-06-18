@@ -95,10 +95,9 @@ def handle_echo_request(conn, lines, path):
                 print("TIPO:" + value.strip())
                 if value.strip() == "gzip":
                     response_headers.append("Content-Encoding: gzip")
-                    response_headers.append(body)
                     break
 
-            response = "\r\n".join(response_headers) + f"\r\n\r\n{echo_str}"
+            response = "\r\n".join(response_headers) + f"\r\n\r\n{echo_str}" + body
         else:
             response = f"HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: {len(echo_str)}\r\n\r\n{echo_str}"
     else:
