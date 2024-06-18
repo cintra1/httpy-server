@@ -92,7 +92,7 @@ def handle_echo_request(conn, lines, path):
 
             for value in encoding:
                 if value.strip() == "gzip":
-                    response_headers.append("Content-Encoding: gzip")
+                    response_headers.append("Content-Encoding: gzip") 
                     body = gzip.compress(echo_str.encode("utf-8"))
                     response_headers.append(f"Content-Length: {len(body)}")
                     response = "\r\n".join(response_headers) + "\r\n\r\n"
